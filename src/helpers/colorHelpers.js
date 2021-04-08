@@ -39,5 +39,5 @@ function getScale(hexColor, numberOfColors) {
 
 function getRange(hexColor) {
   const end = "#fff";
-  return [chroma(hexColor).darken(1.3).hex(), hexColor, end];
+  return [chroma(hexColor).darken(1.4).hex(), hexColor, end];
 }

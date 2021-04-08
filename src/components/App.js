@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="App">
-      <Palette palette={makePalette(seedColors[4])} level={300} />
+      <Palette palette={makePalette(seedColors[4])} />
     </div>
   );
 }

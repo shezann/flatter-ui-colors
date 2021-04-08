@@ -4,18 +4,18 @@ import "../styles/Palette.less";
 import Navbar from "./Navbar";
 
 export default function Palette(props) {
-  //set level
-  const [level, setLevel] = useState(props.level);
-
+  //create states
+  const [level, setLevel] = useState(300);
+  const [type, setType] = useState("hex");
 
   //import ColorBoxes
   const colorBoxes = props.palette.colors[level].map((color) => {
-    return <ColorBox background={color.hex} name={color.name} />;
+    return <ColorBox background={color[type]} name={color.name} />;
   });
 
   return (
     <div className="Palette">
-      <Navbar level={level} setLevel={setLevel} />
+      <Navbar level={level} setLevel={setLevel} setType={setType} />
       <div className="Palette-colors"> {colorBoxes} </div>
       {/* {footer} */}
     </div>
