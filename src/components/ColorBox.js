@@ -8,7 +8,7 @@ export default function ColorBox(props) {
 
   function handleCopy() {
     setshow("show");
-    setTimeout(() => setshow(""), 1200);
+    setTimeout(() => setshow(""), 800);
   }
 
   return (

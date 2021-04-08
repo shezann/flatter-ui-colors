@@ -10,14 +10,19 @@ export default function Palette(props) {
 
   //import ColorBoxes
   const colorBoxes = props.palette.colors[level].map((color) => {
-    return <ColorBox background={color[type]} name={color.name} />;
+    return (
+      <ColorBox background={color[type]} name={color.name} key={color.id} />
+    );
   });
 
   return (
-    <div className="Palette">
+    <div className="palette">
       <Navbar level={level} setLevel={setLevel} setType={setType} />
-      <div className="Palette-colors"> {colorBoxes} </div>
-      {/* {footer} */}
+      <div className="palette-colors"> {colorBoxes} </div>
+      <footer className="palette-footer">
+        {props.palette.paletteName}
+        <span className="emoji">{props.palette.emoji}</span>
+      </footer>
     </div>
   );
 }
