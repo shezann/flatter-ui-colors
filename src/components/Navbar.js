@@ -1,7 +1,7 @@
 import React from "react";
 import { Slider } from "antd";
 import "../styles/Navbar.less";
-import { Select } from "antd";
+import { Select, message } from "antd";
 const { Option } = Select;
 
 export default function Navbar(props) {
@@ -11,6 +11,7 @@ export default function Navbar(props) {
   }
   function handleSelect(value) {
     props.setType(value);
+    message.success(`Changed to ${value}`, 1);
   }
 
   return (
