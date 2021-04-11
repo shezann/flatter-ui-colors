@@ -1,23 +1,59 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
-import "../styles/Home.less";
 import seedColors from "../helpers/seedColors";
+import MiniPalette from "./MiniPalette";
+import { withStyles } from "@material-ui/styles";
 
-export default function Home() {
-  console.log(seedColors);
+const styles = {
+  root: {
+    backgroundColor: "blue",
+    display: "flex",
+    height: "100%",
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+  container: {
+    width: "50%",
+    display: "flex",
+    alignItems: "flex-start",
+    flexDirection: "column",
+    flexWrap: "wrap",
+  },
+  nav: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    "& h1": {
+      color: "white",
+    },
+  },
+  palettes: {
+    boxSizing: "border-box",
+    width: "100%",
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 30%)",
+    gridGap: "5%",
+  },
+};
+
+function Home(props) {
+  const { classes } = props;
 
   return (
-    <div className="Home">
-      <h1>List of Palettes</h1>
+    <div className={classes.root}>
+      <div className={classes.container}>
+        <nav className={classes.nav}>
+          <h1>React Flat Colors</h1>
+        </nav>
 
-      {seedColors.map((palette) => (
-        <p>
-          {" "}
-          <Link to={`/palette/${palette.id}`}>{palette.paletteName}</Link>
-        </p>
-      ))}
-
-      <Link to="/palette/material-ui-colors">Material UI Colors</Link>
+        <div className={classes.palettes}>
+          {seedColors.map((palette) => (
+            <MiniPalette {...palette} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
+
+export default withStyles(styles)(Home);
