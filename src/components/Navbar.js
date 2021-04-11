@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Slider } from "antd";
 import "../styles/Navbar.less";
 import { Select, message } from "antd";
@@ -17,7 +18,7 @@ export default function Navbar(props) {
   return (
     <header className="navbar">
       <div className="name">
-        <a href="#">reactcolorpicker</a>
+        <Link to="/">reactcolorpicker</Link>
       </div>
       <div className="slider-box">
         <span>Level: {props.level}</span>

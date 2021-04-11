@@ -1,17 +1,36 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 import Palette from "./Palette";
 import seedColors from "../helpers/seedColors";
 import { makePalette } from "../helpers/colorHelpers";
+import Home from "./Home";
 // check
 import "../styles/App.less";
 
 function App() {
-  console.log(makePalette(seedColors[4]));
+  function findPalette(id) {
+    return seedColors.find(function (palette) {
+      return palette.id === id;
+    });
+  }
 
   return (
-    <div className="App">
-      <Palette palette={makePalette(seedColors[4])} />
-    </div>
+    <Switch>
+      <Route exact path="/" render={() => <Home />} />
+      <Route
+        exact
+        path="/palette/:id"
+        render={(routeProps) => (
+          <Palette
+            palette={makePalette(findPalette(routeProps.match.params.id))}
+          />
+        )}
+      />
+    </Switch>
+
+    // <div className="App">
+    //   <Palette palette={makePalette(seedColors[0])} />
+    // </div>
   );
 }
 
