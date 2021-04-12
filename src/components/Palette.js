@@ -11,7 +11,14 @@ export default function Palette(props) {
   //import ColorBoxes
   const colorBoxes = props.palette.colors[level].map((color) => {
     return (
-      <ColorBox background={color[type]} name={color.name} key={color.id} />
+      <ColorBox
+        background={color[type]}
+        name={color.name}
+        key={color.id}
+        paletteId={props.palette.id}
+        colorId={color.id}
+        showLink={true}
+      />
     );
   });
 

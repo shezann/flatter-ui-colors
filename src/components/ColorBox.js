@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "../styles/ColorBox.less";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Link } from "react-router-dom";
 
 export default function ColorBox(props) {
-  const { name, background } = props;
+  const { name, background, paletteId, colorId } = props;
   const [show, setshow] = useState("");
 
   function handleCopy() {
@@ -30,7 +31,14 @@ export default function ColorBox(props) {
           </div>
           <button className="copy-button">Copy</button>
         </div>
-        <span className="see-more">More</span>
+        {props.showLink && (
+          <Link
+            to={`/palette/${paletteId}/${colorId}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span className="see-more">More</span>
+          </Link>
+        )}
       </div>
     </CopyToClipboard>
   );

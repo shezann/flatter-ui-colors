@@ -44,7 +44,7 @@ const styles = {
 
 function MiniPalette(props) {
   //extract from props
-  const { classes, paletteName, emoji, colors } = props;
+  const { classes, id, paletteName, emoji, colors } = props;
   //create the mini palletes
   const miniPalettes = colors.map((color) => {
     return (
@@ -56,8 +56,13 @@ function MiniPalette(props) {
     );
   });
 
+  function handleClick() {
+    console.log(`clicked ${id}`);
+    props.history.push(`/palette/${id}`);
+  }
+
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onClick={handleClick}>
       <div className={classes.colors}>{miniPalettes}</div>
       <h5 className={classes.title}>
         {paletteName} <span>{emoji}</span>

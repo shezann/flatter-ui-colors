@@ -4,8 +4,8 @@ import Palette from "./Palette";
 import seedColors from "../helpers/seedColors";
 import { makePalette } from "../helpers/colorHelpers";
 import Home from "./Home";
-// check
 import "../styles/App.less";
+import SingleColor from "./SingleColor";
 
 function App() {
   function findPalette(id) {
@@ -26,11 +26,18 @@ function App() {
           />
         )}
       />
+      <Route
+        path="/palette/:paletteId/:colorId"
+        render={(routeProps) => (
+          <SingleColor
+            palette={makePalette(
+              findPalette(routeProps.match.params.paletteId)
+            )}
+            colorId={routeProps.match.params.colorId}
+          />
+        )}
+      />
     </Switch>
-
-    // <div className="App">
-    //   <Palette palette={makePalette(seedColors[0])} />
-    // </div>
   );
 }
 

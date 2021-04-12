@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import seedColors from "../helpers/seedColors";
 import MiniPalette from "./MiniPalette";
 import { withStyles } from "@material-ui/styles";
@@ -48,7 +48,11 @@ function Home(props) {
 
         <div className={classes.palettes}>
           {seedColors.map((palette) => (
-            <MiniPalette {...palette} />
+            <Route
+              render={(routeProps) => (
+                <MiniPalette {...palette} {...routeProps} />
+              )}
+            />
           ))}
         </div>
       </div>
