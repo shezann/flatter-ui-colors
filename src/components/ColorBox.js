@@ -14,7 +14,7 @@ export default function ColorBox(props) {
   }
 
   const isDark = chroma(background).luminance() <= 0.08;
-  const isLight = chroma(background).luminance() >= 0.7;
+  const isLight = chroma(background).luminance() >= 0.6;
 
   return (
     <CopyToClipboard text={background} onCopy={handleCopy}>
@@ -29,7 +29,7 @@ export default function ColorBox(props) {
 
         <div className={`copy-message ${show}`}>
           <h1 className={isDark && "light-text"}>COPIED!</h1>
-          <p>{background}</p>
+          <p className={isLight && "dark-text"}>{background}</p>
         </div>
 
         <div className="copy-container">
