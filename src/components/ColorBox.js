@@ -14,7 +14,7 @@ export default function ColorBox(props) {
   }
 
   const isDark = chroma(background).luminance() <= 0.08;
-  const isLight = chroma(background).luminance() >= 0.8;
+  const isLight = chroma(background).luminance() >= 0.7;
 
   return (
     <CopyToClipboard text={background} onCopy={handleCopy}>
@@ -28,22 +28,24 @@ export default function ColorBox(props) {
         />
 
         <div className={`copy-message ${show}`}>
-          <h1>COPIED!</h1>
+          <h1 className={isDark && "light-text"}>COPIED!</h1>
           <p>{background}</p>
         </div>
 
         <div className="copy-container">
           <div className="box-content">
-            <span>{name}</span>
+            <span className={isDark && "light-text"}>{name}</span>
           </div>
-          <button className="copy-button">Copy</button>
+          <button className={`copy-button ${isLight && "dark-text"}`}>
+            Copy
+          </button>
         </div>
         {props.showLink && (
           <Link
             to={`/palette/${paletteId}/${colorId}`}
             onClick={(e) => e.stopPropagation()}
           >
-            <span className="see-more">More</span>
+            <span className={`see-more ${isLight && "dark-text"}`}>More</span>
           </Link>
         )}
       </div>
