@@ -24,7 +24,7 @@ export default function Palette(props) {
 
   return (
     <div className="palette">
-      <Navbar level={level} setLevel={setLevel} setType={setType} />
+      <Navbar showSlider={true} level={level} setLevel={setLevel} setType={setType} />
       <div className="palette-colors"> {colorBoxes} </div>
       <footer className="palette-footer">
         {props.palette.paletteName}

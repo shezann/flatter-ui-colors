@@ -10,6 +10,7 @@ export default function Navbar(props) {
   function handleSlider(value) {
     props.setLevel(value);
   }
+  
   function handleSelect(value) {
     props.setType(value);
     message.success(`Changed to ${value}`, 1);
@@ -20,18 +21,22 @@ export default function Navbar(props) {
       <div className="name">
         <Link to="/">reactcolorpicker</Link>
       </div>
-      <div className="slider-box">
-        <span>Level: {props.level}</span>
-        <div className="slider">
-          <Slider
-            defaultValue={props.level}
-            step={100}
-            max={900}
-            min={100}
-            onChange={handleSlider}
-          />
+
+      {props.showSlider && (
+        <div className="slider-box">
+          <span>Level: {props.level}</span>
+          <div className="slider">
+            <Slider
+              defaultValue={props.level}
+              step={100}
+              max={900}
+              min={100}
+              onChange={handleSlider}
+            />
+          </div>
         </div>
-      </div>
+      )}
+
       <div className="select">
         <Select defaultValue="hex" onChange={handleSelect}>
           <Option value="hex">HEX - #FFFFFF</Option>
