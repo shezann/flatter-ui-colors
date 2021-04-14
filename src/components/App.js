@@ -6,6 +6,7 @@ import { makePalette } from "../helpers/colorHelpers";
 import Home from "./Home";
 import "../styles/App.less";
 import SingleColor from "./SingleColor";
+import NewPalette from "./NewPalette";
 
 function App() {
   function findPalette(id) {
@@ -16,7 +17,10 @@ function App() {
 
   return (
     <Switch>
+      <Route exact path="/palette/new" render={() => <NewPalette />} />
+
       <Route exact path="/" render={() => <Home />} />
+
       <Route
         exact
         path="/palette/:id"
@@ -26,6 +30,7 @@ function App() {
           />
         )}
       />
+
       <Route
         path="/palette/:paletteId/:colorId"
         render={(routeProps) => (

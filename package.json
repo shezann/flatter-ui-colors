@@ -12,6 +12,7 @@
     "chroma-js": "^2.1.1",
     "craco-less": "^1.17.0",
     "react": "^16.13.1",
+    "react-color": "2.17.3",
     "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
