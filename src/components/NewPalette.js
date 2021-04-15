@@ -7,6 +7,7 @@ const { Header, Sider } = Layout;
 
 function NewPalette() {
   const [collapsed, setCollapsed] = useState(false);
+  const [buttonColor, setButtonColor] = useState();
 
   function handleClick() {
     collapsed ? setCollapsed(false) : setCollapsed(true);
@@ -23,7 +24,7 @@ function NewPalette() {
           className="sidebar"
           width={400}
         >
-          <div class="sidebar-content">
+          <div className="sidebar-content">
             <h1>Design Your Palette</h1>
             <div className="side-buttons">
               <Button type="primary" danger>
@@ -35,12 +36,16 @@ function NewPalette() {
             <ChromePicker
               className="chrome-picker"
               color="purple"
-              onChangeComplete={(newColor) => console.log(newColor)}
+              onChangeComplete={(newColor) => console.log(newColor.hex)}
             />
 
-            <Button className="add-button" type="primary">
+            <button
+              style={{ backgroundColor: "purple" }}
+              className="add-button"
+              type="primary"
+            >
               ADD COLOUR
-            </Button>
+            </button>
           </div>
         </Sider>
 
