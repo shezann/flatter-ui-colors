@@ -1,3 +1,11 @@
+.root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+
 .ant-drawer.ant-drawer-open .ant-drawer-mask {
     height: 100%;
     opacity: 0;
@@ -10,6 +18,21 @@
     width: 100%;
 }
 
+.ant-layout-header {
+    background: #cbd0d4;
+}
+
+.trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}
 
 .sidebar {
     background-color: #fff;
@@ -67,3 +90,19 @@
 }
 
 
+
+//header
+.header {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.header-btn {
+    margin-right: 5px;
+}
+
+//main content
+.main-content {
+    height: 100vh;
+}

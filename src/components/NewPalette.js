@@ -3,6 +3,8 @@ import { Layout, Button } from "antd";
 import "../styles/NewPalette.less";
 import { ChromePicker } from "react-color";
 import { hex } from "chroma-js";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import DraggableColorBox from "./DraggableColorBox";
 
 const { Header, Sider } = Layout;
 
@@ -38,7 +40,7 @@ function NewPalette() {
   }
 
   return (
-    <div>
+    <div className="root">
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
           trigger={null}
@@ -76,22 +78,32 @@ function NewPalette() {
         </Sider>
 
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }}>
-            <Button type="primary" shape="circle" onClick={collapseSidebar}>
-              >
-            </Button>
-            <Button type="primary">Primary Button</Button>
-            <Button type="primary" danger>
-              Primary Button
-            </Button>
+          <Header
+            className="site-layout-background header"
+            style={{ padding: 0 }}
+          >
+            {React.createElement(
+              collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+              {
+                className: "trigger",
+                onClick: collapseSidebar,
+              }
+            )}
+            <div>
+              <Button type="primary header-btn">Primary Button</Button>
+              <Button type="primary header-btn" danger>
+                Primary Button
+              </Button>
+            </div>
           </Header>
-          <h1>Palette's here</h1>
-          {/* FIXME: finish making palette */}
-          <ul>
+
+          {/* MAIN CONTENT                */}
+          <div className="main-content">
             {palette.map((color) => (
-              <li style={{ backgroundColor: `${color}` }}>{color}</li>
+              <DraggableColorBox color={color} />
             ))}
-          </ul>
+          </div>
+          {/* MAIN CONTENT */}
         </Layout>
       </Layout>
     </div>
