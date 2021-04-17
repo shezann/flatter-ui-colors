@@ -34,26 +34,10 @@
     color: #1890ff;
 }
 
-.sidebar {
-    background-color: #fff;
-    overflow: hidden;
-    
-}
 
-.sidebar-content {
-    margin-top: 60%;
-    text-align: center;
 
-}
 
-.chrome-picker {
-    margin: auto;
-    margin-top: 15px;
-}
 
-.side-buttons {
-    padding: 10px;
-}
 
 .ant-layout {
     display: flex;
@@ -63,6 +47,39 @@
     background: white;
 }
 
+
+
+
+
+//sidebar ////////////////////////////////////
+.sidebar {
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 12px 0px 98px -60px rgba(0, 0, 0, 1);
+    z-index: 1;
+    display: block;
+}
+
+.sidebar-content {
+    margin-top: 50%;
+    text-align: center;
+
+}
+
+.input-btn {
+    margin-top: 15px;
+    width: 300px;
+}
+
+.chrome-picker {
+    margin: auto;
+    margin-top: 15px;
+    width: 300px !important;
+}
+
+.side-buttons {
+    padding: 10px;
+}
 
 .add-button {
     flex-wrap: wrap;
@@ -81,6 +98,7 @@
 .add-button:hover {
     opacity: 0.9;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .add-button:active {
@@ -91,7 +109,7 @@
 
 
 
-//header
+//header /////////////////////////////////
 .header {
     display: flex;
     justify-content:space-between;
@@ -105,4 +123,5 @@
 //main content
 .main-content {
     height: 100vh;
+    overflow: hidden;
 }

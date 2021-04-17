@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Layout, Button } from "antd";
+import { Layout, Button, Input } from "antd";
 import "../styles/NewPalette.less";
 import { ChromePicker } from "react-color";
 import { hex } from "chroma-js";
@@ -39,6 +39,14 @@ function NewPalette() {
     setPalette((prevArray) => [...prevArray, buttonColor.hex]);
   }
 
+  function handleInput() {
+    //TODO: fire validator on input change
+  }
+
+  function handleSubmit() {
+    //TODO: handle input
+  }
+
   return (
     <div className="root">
       <Layout style={{ minHeight: "100vh" }}>
@@ -58,11 +66,16 @@ function NewPalette() {
               </Button>
               <Button type="primary">RANDOM COLOUR</Button>
             </div>
-
             <ChromePicker
-              className="chrome-picker"
+              className="chrome-picker-but"
+              style={{ width: "300px" }}
               color={`hsla(${buttonColor.h},${buttonColor.s},${buttonColor.l}, 1)`}
               onChange={(newColor) => handleColorChange(newColor)}
+            />
+            <Input
+              className="input-btn"
+              size="large"
+              placeholder="Color Name"
             />
 
             <button
