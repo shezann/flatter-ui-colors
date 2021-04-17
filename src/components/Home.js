@@ -47,7 +47,7 @@ function Home(props) {
         </nav>
 
         <div className={classes.palettes}>
-          {seedColors.map((palette) => (
+          {props.palettes.map((palette) => (
             <Route
               render={(routeProps) => (
                 <MiniPalette {...palette} {...routeProps} />

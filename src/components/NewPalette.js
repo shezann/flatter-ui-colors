@@ -8,7 +8,7 @@ import DraggableColorBox from "./DraggableColorBox";
 
 const { Header, Sider } = Layout;
 
-function NewPalette() {
+function NewPalette(props) {
   // useStates
   const [collapsed, setCollapsed] = useState(false);
   const [buttonColor, setButtonColor] = useState({
@@ -22,12 +22,11 @@ function NewPalette() {
   const [currentColor, setCurrentColor] = useState("#F29EFF");
   const [palette, setPalette] = useState([
     {
-      name: "Pink",
       color: "#F29EFF",
+      name: "Pink",
     },
   ]);
 
-  //FIXME: mount the ValidatorForm inside useEffect
   useEffect(() => {
     ValidatorForm.addValidationRule("isNameUnique", (value) =>
       palette.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
@@ -54,7 +53,7 @@ function NewPalette() {
   }
 
   function addColor() {
-    setColorName("")
+    setColorName("");
     setPalette([
       ...palette,
       {
@@ -66,6 +65,19 @@ function NewPalette() {
 
   function handleInput(event) {
     setColorName(event.target.value);
+  }
+
+  function savePalette() {
+    let newName = "New Test Palette";
+
+    const newPalette = {
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      paletteName: newName,
+      colors: palette,
+    };
+    props.savePalette(newPalette);
+
+    props.history.push(`/`);
   }
 
   return (
@@ -132,9 +144,9 @@ function NewPalette() {
               }
             )}
             <div>
-              <Button type="primary header-btn">Primary Button</Button>
-              <Button type="primary header-btn" danger>
-                Primary Button
+              <Button type="secondary header-btn">Primary Button</Button>
+              <Button type="primary header-btn" onClick={savePalette}>
+                Save Palette
               </Button>
             </div>
           </Header>
