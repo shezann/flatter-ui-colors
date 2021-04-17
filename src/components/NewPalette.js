@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { Layout, Button, Input } from "antd";
+import React, { useState, useEffect } from "react";
+import { Layout, Button } from "antd";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import "../styles/NewPalette.less";
 import { ChromePicker } from "react-color";
-import { hex } from "chroma-js";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import DraggableColorBox from "./DraggableColorBox";
 
@@ -19,11 +18,28 @@ function NewPalette() {
     l: "81%",
     a: 1,
   });
-  const [palette, setPalette] = useState([]);
   const [colorName, setColorName] = useState("");
+  const [currentColor, setCurrentColor] = useState("#F29EFF");
+  const [palette, setPalette] = useState([
+    {
+      name: "Pink",
+      color: "#F29EFF",
+    },
+  ]);
+
+  //FIXME: mount the ValidatorForm inside useEffect
+  useEffect(() => {
+    ValidatorForm.addValidationRule("isNameUnique", (value) =>
+      palette.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
+    );
+    ValidatorForm.addValidationRule("isColorUnique", (value) =>
+      palette.every(({ color }) => color !== currentColor)
+    );
+  }, [currentColor, palette]);
 
   function handleColorChange(newColor) {
     const { h, s, l, a } = newColor.hsl;
+    setCurrentColor(newColor.hex);
     setButtonColor({
       hex: `${newColor.hex}`,
       h: h,
@@ -38,15 +54,19 @@ function NewPalette() {
   }
 
   function addColor() {
-    setPalette((prevArray) => [...prevArray, buttonColor.hex]);
-    
+    setColorName("")
+    setPalette([
+      ...palette,
+      {
+        color: buttonColor.hex,
+        name: colorName,
+      },
+    ]);
   }
 
   function handleInput(event) {
     setColorName(event.target.value);
   }
-
-
 
   return (
     <div className="root">
@@ -73,14 +93,18 @@ function NewPalette() {
               color={`hsla(${buttonColor.h},${buttonColor.s},${buttonColor.l}, 1)`}
               onChange={(newColor) => handleColorChange(newColor)}
             />
-            <Input
-              className="input-btn"
-              size="large"
-              placeholder="Color Name"
-            />
 
-            <ValidatorForm onSubmit={addColor}>
-              <TextValidator value={colorName} onChange={handleInput} />
+            <ValidatorForm className="input-btn" onSubmit={addColor}>
+              <TextValidator
+                value={colorName}
+                onChange={handleInput}
+                validators={["required", "isNameUnique", "isColorUnique"]}
+                errorMessages={[
+                  "Enter a colour name",
+                  "Name is already used",
+                  "Color already used",
+                ]}
+              />
 
               <button
                 className="add-button"
@@ -88,7 +112,6 @@ function NewPalette() {
                 style={{
                   background: `linear-gradient(141deg, hsla(${buttonColor.h},${buttonColor.s},${buttonColor.l}, ${buttonColor.a}) 0%, hsla(${buttonColor.h},${buttonColor.s}, 80%, 1) 93%)`,
                 }}
-                onClick={addColor}
               >
                 ADD COLOUR
               </button>
