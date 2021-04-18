@@ -90,6 +90,18 @@ function NewPalette(props) {
     setNewPaletteName(event.target.value);
   }
 
+  function deleteColor(hex) {
+    console.log("🚀 ~ file: NewPalette.js ~ line 94 ~ deleteColor ~ hex", hex);
+
+    const filteredPalette = palette.filter((color) => color.color !== hex);
+    console.log(
+      "🚀 ~ file: NewPalette.js ~ line 97 ~ deleteColor ~ filteredPalette",
+      filteredPalette
+    );
+
+    setPalette(filteredPalette);
+  }
+
   return (
     <div className="root">
       <Layout style={{ minHeight: "100vh" }}>
@@ -170,7 +182,9 @@ function NewPalette(props) {
                 ]}
               />
 
-              <Button type="primary header-btn submit">SAVE PALETTE</Button>
+              <Button type="primary header-btn" htmlType="submit">
+                SAVE PALETTE
+              </Button>
             </ValidatorForm>
 
             <div></div>
@@ -179,7 +193,11 @@ function NewPalette(props) {
           {/* MAIN CONTENT                */}
           <div className="main-content">
             {palette.map((color) => (
-              <DraggableColorBox color={color} />
+              <DraggableColorBox
+                key={color.name}
+                color={color}
+                handleClick={() => deleteColor(color.color)}
+              />
             ))}
           </div>
           {/* MAIN CONTENT */}

@@ -3,16 +3,10 @@ import ColorBox from "./ColorBox";
 import "../styles/Palette.less";
 import "../styles/ColorBox.less";
 import Navbar from "./Navbar";
-import { message } from "antd";
 import { Link } from "react-router-dom";
 
 export default function SingleColor(props) {
   const [type, setType] = useState("hex");
-
-  function handleSelect(value) {
-    props.setType(value);
-    message.success(`Changed to ${value}`, 1);
-  }
 
   //get the shades of the one color that is in the link
   // LOGIC copied from Colt Steele TODO: add github link

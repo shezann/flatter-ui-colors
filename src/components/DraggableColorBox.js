@@ -10,7 +10,7 @@ export default function DraggableColorBox(props) {
       <div className="content">
         <span>{color.name}</span>
         <span>
-          <DeleteFilled className="delete-icon" />
+          <DeleteFilled className="delete-icon" onClick={props.handleClick} />
         </span>
       </div>
     </div>
