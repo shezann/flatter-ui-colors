@@ -5,6 +5,7 @@ import "../styles/NewPalette.less";
 import { ChromePicker } from "react-color";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import DraggableColorBox from "./DraggableColorBox";
+import DraggableColorList from "./DraggableColorList";
 
 const { Header, Sider } = Layout;
 
@@ -91,14 +92,7 @@ function NewPalette(props) {
   }
 
   function deleteColor(hex) {
-    console.log("🚀 ~ file: NewPalette.js ~ line 94 ~ deleteColor ~ hex", hex);
-
     const filteredPalette = palette.filter((color) => color.color !== hex);
-    console.log(
-      "🚀 ~ file: NewPalette.js ~ line 97 ~ deleteColor ~ filteredPalette",
-      filteredPalette
-    );
-
     setPalette(filteredPalette);
   }
 
@@ -192,13 +186,7 @@ function NewPalette(props) {
 
           {/* MAIN CONTENT                */}
           <div className="main-content">
-            {palette.map((color) => (
-              <DraggableColorBox
-                key={color.name}
-                color={color}
-                handleClick={() => deleteColor(color.color)}
-              />
-            ))}
+            <DraggableColorList palette={palette} deleteColor={deleteColor} />
           </div>
           {/* MAIN CONTENT */}
         </Layout>
