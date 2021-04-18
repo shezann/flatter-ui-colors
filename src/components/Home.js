@@ -1,6 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
-import seedColors from "../helpers/seedColors";
+import { Route, Link } from "react-router-dom";
 import MiniPalette from "./MiniPalette";
 import { withStyles } from "@material-ui/styles";
 
@@ -22,9 +21,16 @@ const styles = {
   nav: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
     width: "100%",
     "& h1": {
       color: "white",
+    },
+    "& a": {
+      color: "white",
+    },
+    "& a:hover": {
+      textDecoration: "underline",
     },
   },
   palettes: {
@@ -44,6 +50,7 @@ function Home(props) {
       <div className={classes.container}>
         <nav className={classes.nav}>
           <h1>React Flat Colors</h1>
+          <Link to="/palette/new">Create New Palette</Link>
         </nav>
 
         <div className={classes.palettes}>

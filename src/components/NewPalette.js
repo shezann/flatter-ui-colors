@@ -26,6 +26,7 @@ function NewPalette(props) {
       name: "Pink",
     },
   ]);
+  const [newPaletteName, setNewPaletteName] = useState("");
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isNameUnique", (value) =>
@@ -34,7 +35,12 @@ function NewPalette(props) {
     ValidatorForm.addValidationRule("isColorUnique", (value) =>
       palette.every(({ color }) => color !== currentColor)
     );
-  }, [currentColor, palette]);
+    ValidatorForm.addValidationRule("isPaletteUnique", (value) =>
+      props.palettes.every(
+        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
+      )
+    );
+  }, [currentColor, palette, props.palettes]);
 
   function handleColorChange(newColor) {
     const { h, s, l, a } = newColor.hsl;
@@ -68,7 +74,7 @@ function NewPalette(props) {
   }
 
   function savePalette() {
-    let newName = "New Test Palette";
+    let newName = newPaletteName;
 
     const newPalette = {
       id: newName.toLowerCase().replace(/ /g, "-"),
@@ -78,6 +84,10 @@ function NewPalette(props) {
     props.savePalette(newPalette);
 
     props.history.push(`/`);
+  }
+
+  function handlePaletteNameInput(event) {
+    setNewPaletteName(event.target.value);
   }
 
   return (
@@ -109,6 +119,7 @@ function NewPalette(props) {
             <ValidatorForm className="input-btn" onSubmit={addColor}>
               <TextValidator
                 value={colorName}
+                label="Color Name"
                 onChange={handleInput}
                 validators={["required", "isNameUnique", "isColorUnique"]}
                 errorMessages={[
@@ -143,12 +154,26 @@ function NewPalette(props) {
                 onClick: collapseSidebar,
               }
             )}
-            <div>
-              <Button type="secondary header-btn">Primary Button</Button>
-              <Button type="primary header-btn" onClick={savePalette}>
-                Save Palette
-              </Button>
-            </div>
+
+            <ValidatorForm
+              className="palette-name-input"
+              onSubmit={savePalette}
+            >
+              <TextValidator
+                value={newPaletteName}
+                label="Palette Name"
+                onChange={handlePaletteNameInput}
+                validators={["required", "isPaletteUnique"]}
+                errorMessages={[
+                  "Enter a palette name",
+                  "Palette name is already used",
+                ]}
+              />
+
+              <Button type="primary header-btn submit">SAVE PALETTE</Button>
+            </ValidatorForm>
+
+            <div></div>
           </Header>
 
           {/* MAIN CONTENT                */}
