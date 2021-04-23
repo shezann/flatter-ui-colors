@@ -1,8 +1,9 @@
 import React from "react";
 import "../styles/DraggableColorBox.less";
 import { DeleteFilled } from "@ant-design/icons";
+import { SortableElement } from "react-sortable-hoc";
 
-export default function DraggableColorBox(props) {
+const DraggableColorBox = SortableElement((props) => {
   const { color } = props;
 
   return (
@@ -15,4 +16,6 @@ export default function DraggableColorBox(props) {
       </div>
     </div>
   );
-}
+});
+
+export default DraggableColorBox;

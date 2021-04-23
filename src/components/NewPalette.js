@@ -3,9 +3,9 @@ import { Layout, Button } from "antd";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import "../styles/NewPalette.less";
 import { ChromePicker } from "react-color";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import DraggableColorBox from "./DraggableColorBox";
 import DraggableColorList from "./DraggableColorList";
+import { arrayMove } from "react-sortable-hoc";
+import NewPaletteNavbar from "./NewPaletteNavbar";
 
 const { Header, Sider } = Layout;
 
@@ -21,27 +21,14 @@ function NewPalette(props) {
   });
   const [colorName, setColorName] = useState("");
   const [currentColor, setCurrentColor] = useState("#F29EFF");
-  const [palette, setPalette] = useState([
-    {
-      color: "#F29EFF",
-      name: "Pink",
-    },
-  ]);
+  const [palette, setPalette] = useState(props.palettes[0].colors);
   const [newPaletteName, setNewPaletteName] = useState("");
 
   useEffect(() => {
     ValidatorForm.addValidationRule("isNameUnique", (value) =>
       palette.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
     );
-    ValidatorForm.addValidationRule("isColorUnique", (value) =>
-      palette.every(({ color }) => color !== currentColor)
-    );
-    ValidatorForm.addValidationRule("isPaletteUnique", (value) =>
-      props.palettes.every(
-        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-      )
-    );
-  }, [currentColor, palette, props.palettes]);
+  }, [palette]);
 
   function handleColorChange(newColor) {
     const { h, s, l, a } = newColor.hsl;
@@ -53,10 +40,6 @@ function NewPalette(props) {
       l: `${l * 100}%`,
       a: a,
     });
-  }
-
-  function collapseSidebar() {
-    collapsed ? setCollapsed(false) : setCollapsed(true);
   }
 
   function addColor() {
@@ -74,27 +57,33 @@ function NewPalette(props) {
     setColorName(event.target.value);
   }
 
-  function savePalette() {
-    let newName = newPaletteName;
-
-    const newPalette = {
-      id: newName.toLowerCase().replace(/ /g, "-"),
-      paletteName: newName,
-      colors: palette,
-    };
-    props.savePalette(newPalette);
-
-    props.history.push(`/`);
-  }
-
-  function handlePaletteNameInput(event) {
-    setNewPaletteName(event.target.value);
-  }
-
   function deleteColor(hex) {
     const filteredPalette = palette.filter((color) => color.color !== hex);
     setPalette(filteredPalette);
   }
+
+  function onSortEnd({ oldIndex, newIndex }) {
+    setPalette(arrayMove(palette, oldIndex, newIndex));
+  }
+
+  function clearPalette() {
+    setPalette([]);
+  }
+
+  function getRandomColor() {
+    //pick random color from all previous colors
+    const allColors = props.palettes.map((p) => p.colors).flat();
+    let random = Math.floor(Math.random() * allColors.length);
+    setPalette([...palette, allColors[random]]);
+  }
+
+  function hitMax() {
+    return palette.length >= 20;
+  }
+
+  let addButtonStyle = {
+    background: `linear-gradient(141deg, hsla(${buttonColor.h},${buttonColor.s},${buttonColor.l}, ${buttonColor.a}) 0%, hsla(${buttonColor.h},${buttonColor.s}, 80%, 1) 93%)`,
+  };
 
   return (
     <div className="root">
@@ -110,10 +99,16 @@ function NewPalette(props) {
           <div className="sidebar-content">
             <h1>Design Your Palette</h1>
             <div className="side-buttons">
-              <Button type="primary" danger>
+              <Button onClick={clearPalette} type="primary" danger>
                 CLEAR PALETTE
               </Button>
-              <Button type="primary">RANDOM COLOUR</Button>
+              <Button
+                onClick={getRandomColor}
+                type="primary"
+                disabled={hitMax() && true}
+              >
+                RANDOM COLOUR
+              </Button>
             </div>
             <ChromePicker
               className="chrome-picker-but"
@@ -138,11 +133,10 @@ function NewPalette(props) {
               <button
                 className="add-button"
                 type="submit"
-                style={{
-                  background: `linear-gradient(141deg, hsla(${buttonColor.h},${buttonColor.s},${buttonColor.l}, ${buttonColor.a}) 0%, hsla(${buttonColor.h},${buttonColor.s}, 80%, 1) 93%)`,
-                }}
+                style={hitMax() ? { background: "grey" } : addButtonStyle}
+                disabled={hitMax() && true}
               >
-                ADD COLOUR
+                {hitMax() ? "PALETTE FULL" : "ADD COLOUR"}
               </button>
             </ValidatorForm>
           </div>
@@ -153,40 +147,27 @@ function NewPalette(props) {
             className="site-layout-background header"
             style={{ padding: 0 }}
           >
-            {React.createElement(
-              collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-              {
-                className: "trigger",
-                onClick: collapseSidebar,
-              }
-            )}
-
-            <ValidatorForm
-              className="palette-name-input"
-              onSubmit={savePalette}
-            >
-              <TextValidator
-                value={newPaletteName}
-                label="Palette Name"
-                onChange={handlePaletteNameInput}
-                validators={["required", "isPaletteUnique"]}
-                errorMessages={[
-                  "Enter a palette name",
-                  "Palette name is already used",
-                ]}
-              />
-
-              <Button type="primary header-btn" htmlType="submit">
-                SAVE PALETTE
-              </Button>
-            </ValidatorForm>
-
-            <div></div>
+            <NewPaletteNavbar
+              palette={palette}
+              newPaletteName={newPaletteName}
+              setNewPaletteName={setNewPaletteName}
+              currentColor={currentColor}
+              setCollapsed={setCollapsed}
+              collapsed={collapsed}
+              palettes={props.palettes}
+              history={props.history}
+              savePalette={props.savePalette}
+            />
           </Header>
 
           {/* MAIN CONTENT                */}
           <div className="main-content">
-            <DraggableColorList palette={palette} deleteColor={deleteColor} />
+            <DraggableColorList
+              palette={palette}
+              deleteColor={deleteColor}
+              axis="xy"
+              onSortEnd={onSortEnd}
+            />
           </div>
           {/* MAIN CONTENT */}
         </Layout>
