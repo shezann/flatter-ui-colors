@@ -7,6 +7,7 @@ import { ChromePicker } from "react-color";
 export default function ColorPicker(props) {
   const {
     palette,
+    palettes,
     setColorName,
     setButtonColor,
     colorName,
@@ -39,7 +40,7 @@ export default function ColorPicker(props) {
 
   function getRandomColor() {
     //pick random color from all previous colors
-    const allColors = props.palettes.map((p) => p.colors).flat();
+    const allColors = palettes.map((p) => p.colors).flat();
     let random = Math.floor(Math.random() * allColors.length);
     setPalette([...palette, allColors[random]]);
   }
@@ -71,10 +72,16 @@ export default function ColorPicker(props) {
     <div className="sidebar-content">
       <h1>Design Your Palette</h1>
       <div className="side-buttons">
-        <Button onClick={clearPalette} type="primary" danger>
+        <Button
+          className="side-button"
+          onClick={clearPalette}
+          type="primary"
+          danger
+        >
           CLEAR PALETTE
         </Button>
         <Button
+          className="side-button"
           onClick={getRandomColor}
           type="primary"
           disabled={hitMax() && true}
@@ -89,11 +96,12 @@ export default function ColorPicker(props) {
         onChange={(newColor) => handleColorChange(newColor)}
       />
 
-      <ValidatorForm className="input-btn" onSubmit={addColor}>
+      <ValidatorForm onSubmit={addColor}>
         <TextValidator
           value={colorName}
           label="Color Name"
           onChange={handleInput}
+          className="input"
           validators={["required", "isNameUnique", "isColorUnique"]}
           errorMessages={[
             "Enter a colour name",

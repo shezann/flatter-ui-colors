@@ -46,10 +46,11 @@ function NewPalette(props) {
           collapsedWidth={0}
           collapsed={collapsed}
           className="sidebar"
-          width={400}
+          width={350}
         >
           <ColorPicker
             palette={palette}
+            palettes={props.palettes}
             setColorName={setColorName}
             setButtonColor={setButtonColor}
             colorName={colorName}
