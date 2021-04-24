@@ -76,6 +76,7 @@ function NewPalette(props) {
               history={props.history}
               savePalette={props.savePalette}
             />
+
           </Header>
 
           {/* MAIN CONTENT                */}
