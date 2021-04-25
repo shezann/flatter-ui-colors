@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "antd";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { Picker } from "emoji-mart";
+import "emoji-mart/css/emoji-mart.css";
 
 export default function SavePaletteForm(props) {
   const {
@@ -16,13 +18,16 @@ export default function SavePaletteForm(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [emojilVisible, setEmojiVisible] = useState(false);
 
-  function addPalette() {
+  //FIXME: call this only when emoji is picked
+  function addPalette(emoji) {
     let newName = newPaletteName;
 
     const newPalette = {
       id: newName.toLowerCase().replace(/ /g, "-"),
       paletteName: newName,
       colors: palette,
+      emoji: emoji.native,
+      //FIXME: add the emoji in here before saving
     };
     savePalette(newPalette);
 
@@ -66,15 +71,22 @@ export default function SavePaletteForm(props) {
           key: "submit",
           htmlType: "submit",
         }}
-        onOk={() => setModalVisible(true)}
         onCancel={() => setModalVisible(false)}
       >
         <div>
           <p>Please enter a name for your awesome palette</p>
-          <ValidatorForm id="palette-name-form" onSubmit={addPalette}>
+          {/* FIXME: don't call onsubmit here or at least don't submit until the emoji is picked */}
+          {/* FIXME: showemojimodal on submit instead of addPalette */}
+          <ValidatorForm
+            id="palette-name-form"
+            onSubmit={() => {
+              setEmojiVisible(true);
+              setModalVisible(false);
+            }}
+          >
             <TextValidator
               value={newPaletteName}
-              style={{width: "300px"}}
+              style={{ width: "300px" }}
               label="Palette Name"
               onChange={handlePaletteNameInput}
               validators={["required", "isPaletteUnique"]}
@@ -85,6 +97,17 @@ export default function SavePaletteForm(props) {
             />
           </ValidatorForm>
         </div>
+      </Modal>
+
+      <Modal
+        centered
+        width="400px"
+        closable={false}
+        visible={emojilVisible}
+        footer={null}
+        onCancel={() => setEmojiVisible(false)}
+      >
+        <Picker onSelect={(emoji) => addPalette(emoji)} />
       </Modal>
     </div>
   );

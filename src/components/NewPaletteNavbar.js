@@ -11,7 +11,6 @@ export default function NewPaletteNavbar(props) {
     palettes,
     newPaletteName,
     setNewPaletteName,
-    currentColor,
     collapsed,
     setCollapsed,
     history,
