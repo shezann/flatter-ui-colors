@@ -70,7 +70,7 @@ export default function ColorPicker(props) {
 
   return (
     <div className="sidebar-content">
-      <h1>Design Your Palette</h1>
+      <h1>Pick your colour</h1>
       <div className="side-buttons">
         <Button
           className="side-button"
