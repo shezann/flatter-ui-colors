@@ -18,7 +18,6 @@ export default function SavePaletteForm(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [emojilVisible, setEmojiVisible] = useState(false);
 
-  //FIXME: call this only when emoji is picked
   function addPalette(emoji) {
     let newName = newPaletteName;
 
@@ -27,7 +26,6 @@ export default function SavePaletteForm(props) {
       paletteName: newName,
       colors: palette,
       emoji: emoji.native,
-      //FIXME: add the emoji in here before saving
     };
     savePalette(newPalette);
 
@@ -75,8 +73,6 @@ export default function SavePaletteForm(props) {
       >
         <div>
           <p>Please enter a name for your awesome palette</p>
-          {/* FIXME: don't call onsubmit here or at least don't submit until the emoji is picked */}
-          {/* FIXME: showemojimodal on submit instead of addPalette */}
           <ValidatorForm
             id="palette-name-form"
             onSubmit={() => {

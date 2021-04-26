@@ -43,7 +43,7 @@ export default function ColorBox(props) {
         {props.showLink && (
           <Link
             to={`/palette/${paletteId}/${colorId}`}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(event) => event.stopPropagation()}
           >
             <span className={`see-more ${isLight && "dark-text"}`}>More</span>
           </Link>

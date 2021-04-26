@@ -43,7 +43,14 @@ const styles = {
 };
 
 function Home(props) {
-  const { classes } = props;
+  const { classes, palettes, setPalettes } = props;
+
+  //TODO: do filtering delete
+  function deletePalette(id) {
+    console.log(palettes);
+    const filteredPalettes = palettes.filter((palette) => palette.id !== id);
+    setPalettes(filteredPalettes);
+  }
 
   return (
     <div className={classes.root}>
@@ -57,7 +64,11 @@ function Home(props) {
           {props.palettes.map((palette) => (
             <Route
               render={(routeProps) => (
-                <MiniPalette {...palette} {...routeProps} />
+                <MiniPalette
+                  {...palette}
+                  {...routeProps}
+                  deletePalette={deletePalette}
+                />
               )}
             />
           ))}

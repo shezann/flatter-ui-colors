@@ -47,7 +47,11 @@ function App() {
         )}
       />
 
-      <Route exact path="/" render={() => <Home palettes={palettes} />} />
+      <Route
+        exact
+        path="/"
+        render={() => <Home palettes={palettes} setPalettes={setPalettes} />}
+      />
 
       <Route
         exact

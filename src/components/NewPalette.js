@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Layout, Button } from "antd";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import React, { useState } from "react";
+import { Layout } from "antd";
 import "../styles/NewPalette.less";
-import { ChromePicker } from "react-color";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import DraggableColorBox from "./DraggableColorBox";
 import DraggableColorList from "./DraggableColorList";
 import { arrayMove } from "react-sortable-hoc";
-import { Link } from "react-router-dom";
 import NewPaletteNavbar from "./NewPaletteNavbar";
 import ColorPicker from "./ColorPicker";
 
@@ -76,7 +71,6 @@ function NewPalette(props) {
               history={props.history}
               savePalette={props.savePalette}
             />
-
           </Header>
 
           {/* MAIN CONTENT                */}

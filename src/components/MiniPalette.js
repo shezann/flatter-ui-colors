@@ -1,5 +1,6 @@
 import React from "react";
 import { withStyles } from "@material-ui/styles";
+import { DeleteFilled } from "@ant-design/icons";
 
 const styles = {
   root: {
@@ -9,14 +10,16 @@ const styles = {
     padding: "0.5rem",
     overflow: "hidden",
     borderRadius: "5px",
-    "&:hover": {
-      cursor: "pointer",
+    cursor: "pointer",
+    "&:hover span": {
+      opacity: "1",
     },
   },
   colors: {
     backgroundColor: "#dae1e4",
     height: "150px",
-    widh: "100%",
+    width: "100%",
+    borderRadius: "5px",
   },
   title: {
     display: "flex",
@@ -24,12 +27,11 @@ const styles = {
     alignItems: "center",
     margin: "0",
     color: "black",
-    paddingTop: "0.5rem",
+    paddingTop: "0.3rem",
     fontSize: "1rem",
     position: "relative",
     "& span": {
       marginLeft: "0.5rem",
-      fontSize: "1.5rem",
     },
   },
   miniColor: {
@@ -38,7 +40,35 @@ const styles = {
     display: "inline-block",
     margin: "0 auto",
     position: "relative",
-    marginBottom: "-5.6px",
+    marginBottom: "-6px",
+    "&:nth-child(1)": {
+      borderTopLeftRadius: "5px",
+    },
+    "&:nth-child(5)": {
+      borderTopRightRadius: "5px",
+    },
+    "&:nth-child(16)": {
+      borderBottomLeftRadius: "5px",
+    },
+    "&:nth-child(20)": {
+      borderBottomRightRadius: "5px",
+    },
+  },
+  delete: {
+    transition: "all 0.2s ease-in-out",
+    fontSize: "20px",
+    margin: "5px",
+    borderRadius: "5px",
+    position: "absolute",
+    opacity: "0",
+    paddingTop: "3px",
+    backgroundColor: "red",
+    top: "0px",
+    right: "0px",
+    width: "14%",
+    height: "14%",
+    zIndex: "10",
+    color: "white",
   },
 };
 
@@ -61,8 +91,17 @@ function MiniPalette(props) {
     props.history.push(`/palette/${id}`);
   }
 
+  function handleDelete(event) {
+    event.stopPropagation();
+    props.deletePalette(id);
+  }
+
   return (
     <div className={classes.root} onClick={handleClick}>
+      <DeleteFilled
+        className={classes.delete}
+        onClick={(event) => handleDelete(event)}
+      />
       <div className={classes.colors}>{miniPalettes}</div>
       <h5 className={classes.title}>
         {paletteName} <span>{emoji}</span>
