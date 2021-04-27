@@ -1,19 +1,27 @@
-// Edit
+//variables
+@md: 991.98px;
+@s: 575.98px;
+
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  height: 5vh;
+  justify-content: space-between;
+  height: 6vh;
 }
 
 .name {
-  margin-right: 15px;
+  margin: 15px;
   padding: 0 10px;
-  font-size: 20px;
+
   background-color: aliceblue;
-  height: 100%;
+  border-radius: 4px;
   display: flex;
   align-items: center;
+}
+
+.name a {
+  font-weight: 600;
+  color: black;
 }
 
 .slider-box {
@@ -24,7 +32,6 @@
 .slider {
   width: 340px;
   margin: 0 10px;
-  display: inline-block;
 
   .ant-slider-step {
     background: rgb(221, 218, 218);
@@ -41,8 +48,23 @@
     border: #000;
   }
 }
+@media all and (max-width: @md) {
+  .slider {
+    width: 280px;
+  }
+}
+@media all and (max-width: @s) {
+  .name {
+    display: none;
+  }
+  .slider {
+    width: 140px;
+  }
+  .navbar {
+    justify-content: center;
+  }
+}
 
 .select {
-  position: absolute;
-  right: 10px;
+  margin-right: 10px;
 }

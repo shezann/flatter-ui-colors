@@ -19,7 +19,7 @@ export default function Navbar(props) {
   return (
     <header className="navbar">
       <div className="name">
-        <Link to="/">reactcolorpicker</Link>
+        <Link to="/"> Back</Link>
       </div>
 
       {props.showSlider && (

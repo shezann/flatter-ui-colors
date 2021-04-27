@@ -1,3 +1,7 @@
+//variables
+@md: 991.98px;
+@s: 575.98px;
+
 //change font
 h1 {
   font-family: "Barlow", sans-serif;
@@ -20,23 +24,53 @@ button {
   display: inline-block;
   position: relative;
   cursor: pointer;
-  margin-bottom: -6px;
+  margin-bottom: -6.1px;
 }
-
-@media all and (max-width: 768px) {
+@media all and (max-width: @md) {
   .ColorBox {
     width: 50%;
+    height: 10%;
+  }
+}
+@media all and (max-width: @s) {
+  .ColorBox {
+    width: 100%;
+    height: 5%;
   }
 }
 
 .single-color {
   height: 50%;
 }
+@media all and (max-width: @md) {
+  .single-color {
+    width: 100%;
+    height: 10%;
+  }
+}
+@media all and (max-width: @s) {
+  .single-color {
+    width: 100%;
+    height: 10%;
+  }
+}
 
 .go-back.ColorBox {
   background-color: black;
   height: 50%;
   text-align: center;
+}
+@media all and (max-width: @md) {
+  .go-back.ColorBox {
+    width: 100%;
+    height: 10%;
+  }
+}
+@media all and (max-width: @s) {
+  .go-back.ColorBox {
+    width: 100%;
+    height: 10%;
+  }
 }
 
 .copy-button,
@@ -103,7 +137,6 @@ button {
   text-align: center;
   line-height: 30px;
   text-transform: uppercase;
-
 }
 
 .copy-overlay {

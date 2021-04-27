@@ -5,6 +5,7 @@ import DraggableColorList from "./DraggableColorList";
 import { arrayMove } from "react-sortable-hoc";
 import NewPaletteNavbar from "./NewPaletteNavbar";
 import ColorPicker from "./ColorPicker";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 
 const { Header, Sider } = Layout;
 
@@ -32,6 +33,10 @@ function NewPalette(props) {
     setPalette(arrayMove(palette, oldIndex, newIndex));
   }
 
+  function collapseSidebar() {
+    collapsed ? setCollapsed(false) : setCollapsed(true);
+  }
+
   return (
     <div className="root">
       <Layout style={{ minHeight: "100vh" }}>
@@ -43,6 +48,18 @@ function NewPalette(props) {
           className="sidebar"
           width={350}
         >
+          {!collapsed && (
+            <div className="s-toggle">
+              {React.createElement(
+                collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+                {
+                  className: "trigger",
+                  onClick: collapseSidebar,
+                }
+              )}
+            </div>
+          )}
+
           <ColorPicker
             palette={palette}
             palettes={props.palettes}
