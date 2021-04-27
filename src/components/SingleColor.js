@@ -44,7 +44,7 @@ export default function SingleColor(props) {
         {colorBoxes}
         <div className="go-back ColorBox">
           <Link to={`/palette/${props.palette.id}`} className="back-button">
-            BACK
+            <span>BACK</span>
           </Link>
         </div>
       </div>

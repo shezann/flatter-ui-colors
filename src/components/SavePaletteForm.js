@@ -57,7 +57,7 @@ export default function SavePaletteForm(props) {
         type="primary"
         onClick={() => setModalVisible(true)}
       >
-        SAVE PALETTE
+        <span style={{ marginBottom: "10px" }}>SAVE PALETTE</span>
       </Button>
       <Modal
         title="Saving Palette"

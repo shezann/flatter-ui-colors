@@ -25,12 +25,30 @@ const styles = {
     width: "100%",
     "& h1": {
       color: "white",
+      fontSize: "28px",
+      fontWeight: "800",
+      letterSpacing: "2.5px",
+      textTransform: "uppercase",
+      marginTop: "15px",
+      marginBottom: "15px",
     },
     "& a": {
       color: "white",
+      fontSize: "17px",
+      fontWeight: "600",
+      transition: "0.5s ease all .3s",
+      "&:before": {
+        background: "#fff",
+        content: `""`,
+        position: "absolute",
+        height: "2px",
+        width: "0",
+        top: "47px",
+      },
     },
-    "& a:hover": {
-      textDecoration: "underline",
+    "& a:hover:before": {
+      width: "144px",
+      transition: "0.3s ease all",
     },
   },
   palettes: {
@@ -56,7 +74,7 @@ function Home(props) {
     <div className={classes.root}>
       <div className={classes.container}>
         <nav className={classes.nav}>
-          <h1>React Flat Colors</h1>
+          <h1>Flatter UI Colors</h1>
           <Link to="/palette/new">Create New Palette</Link>
         </nav>
 

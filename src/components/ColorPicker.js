@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button } from "antd";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import "../styles/ColorPicker.less";
@@ -73,20 +73,20 @@ export default function ColorPicker(props) {
       <h1>Pick your colour</h1>
       <div className="side-buttons">
         <Button
-          className="side-button"
+          className="side-button1"
           onClick={clearPalette}
           type="primary"
           danger
         >
-          CLEAR PALETTE
+          CLEAR ALL
         </Button>
         <Button
-          className="side-button"
+          className="side-button2"
           onClick={getRandomColor}
           type="primary"
           disabled={hitMax() && true}
         >
-          RANDOM COLOUR
+          RANDOM COLOR
         </Button>
       </div>
       <ChromePicker

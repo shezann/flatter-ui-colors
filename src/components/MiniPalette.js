@@ -30,6 +30,9 @@ const styles = {
     paddingTop: "0.3rem",
     fontSize: "1rem",
     position: "relative",
+    fontFamily: "Barlow",
+    fontWeight: "600",
+    letterSpacing: "0.55px",
     "& span": {
       marginLeft: "0.5rem",
     },

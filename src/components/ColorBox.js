@@ -28,7 +28,7 @@ export default function ColorBox(props) {
         />
 
         <div className={`copy-message ${show}`}>
-          <h1 className={isDark && "light-text"}>COPIED!</h1>
+          <h1 className={"light-text"}>COPIED!</h1>
           <p className={isLight && "dark-text"}>{background}</p>
         </div>
 

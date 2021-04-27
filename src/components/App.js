@@ -7,7 +7,6 @@ import Home from "./Home";
 import "../styles/App.less";
 import SingleColor from "./SingleColor";
 import NewPalette from "./NewPalette";
-import { WindowsFilled } from "@ant-design/icons";
 
 function App() {
   const savedPalettes = JSON.parse(window.localStorage.getItem("palettes"));
@@ -26,6 +25,7 @@ function App() {
 
   useEffect(() => {
     syncLocalStorage();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [palettes]);
 
   function syncLocalStorage() {

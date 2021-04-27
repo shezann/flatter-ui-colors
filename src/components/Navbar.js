@@ -10,7 +10,7 @@ export default function Navbar(props) {
   function handleSlider(value) {
     props.setLevel(value);
   }
-  
+
   function handleSelect(value) {
     props.setType(value);
     message.success(`Changed to ${value}`, 1);
@@ -39,9 +39,9 @@ export default function Navbar(props) {
 
       <div className="select">
         <Select defaultValue="hex" onChange={handleSelect}>
-          <Option value="hex">HEX - #FFFFFF</Option>
-          <Option value="rgb">RGB - rgb(255,255,255)</Option>
-          <Option value="rgba">RGBA - rgb(255,255,255, 1.0)</Option>
+          <Option value="hex">HEX - #AA1923</Option>
+          <Option value="rgb">RGB - (1,2,3)</Option>
+          <Option value="rgba">RGBA - (1,2,3, 0.4)</Option>
         </Select>
       </div>
     </header>
