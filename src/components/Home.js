@@ -76,10 +76,10 @@ const styles = {
     width: "100%",
     display: "grid",
     gridTemplateColumns: "repeat(3, 30%)",
-    gridGap: "2.5rem",
+    gridGap: "5%",
     [`@media (max-width: 991.98px )`]: {
-      gridTemplateColumns: "repeat(2,50%)",
-      gridGap: "1.5rem",
+      gridTemplateColumns: "repeat(2,48%)",
+      gridGap: "4%",
     },
     [`@media (max-width: 575.98px )`]: {
       gridTemplateColumns: "repeat(1,100%)",
@@ -87,7 +87,10 @@ const styles = {
     },
   },
   [`@media (max-width:1500.98px )`]: {
-    container: { width: "80%" },
+    container: { width: "60%" },
+  },
+  [`@media (max-width:1260.98px )`]: {
+    container: { width: "70%" },
   },
   [`@media (max-width:991.98px )`]: {
     container: { width: "80%" },
