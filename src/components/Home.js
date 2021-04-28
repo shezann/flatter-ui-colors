@@ -3,6 +3,8 @@ import { Route, Link } from "react-router-dom";
 import MiniPalette from "./MiniPalette";
 import { withStyles } from "@material-ui/styles";
 import background from "../styles/background.svg";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "../styles/global.less";
 
 const styles = {
   root: {
@@ -95,7 +97,6 @@ const styles = {
 function Home(props) {
   const { classes, palettes, setPalettes } = props;
 
-  //TODO: do filtering delete
   function deletePalette(id) {
     console.log(palettes);
     const filteredPalettes = palettes.filter((palette) => palette.id !== id);
@@ -110,19 +111,21 @@ function Home(props) {
           <Link to="/palette/new">Create New Palette</Link>
         </nav>
 
-        <div className={classes.palettes}>
+        <TransitionGroup className={classes.palettes}>
           {props.palettes.map((palette) => (
-            <Route
-              render={(routeProps) => (
-                <MiniPalette
-                  {...palette}
-                  {...routeProps}
-                  deletePalette={deletePalette}
-                />
-              )}
-            />
+            <CSSTransition key={palette.id} timeout={500} classNames="item">
+              <Route
+                render={(routeProps) => (
+                  <MiniPalette
+                    {...palette}
+                    {...routeProps}
+                    deletePalette={deletePalette}
+                  />
+                )}
+              />
+            </CSSTransition>
           ))}
-        </div>
+        </TransitionGroup>
       </div>
     </div>
   );
