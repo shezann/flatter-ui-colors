@@ -23,6 +23,10 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
+    //for small screens
+    [`@media (max-width: 575.98px )`]: {
+      display: "inline-block",
+    },
     "& h1": {
       color: "white",
       fontSize: "28px",
@@ -31,12 +35,23 @@ const styles = {
       textTransform: "uppercase",
       marginTop: "15px",
       marginBottom: "15px",
+      //for small screens
+      [`@media (max-width: 575.98px )`]: {
+        marginBottom: "30px",
+        textAlign: "center",
+      },
     },
     "& a": {
       color: "white",
       fontSize: "17px",
       fontWeight: "600",
       transition: "0.5s ease all .3s",
+      [`@media (max-width: 575.98px )`]: {
+        position: "absolute",
+        top: "55px",
+        left: "30%",
+        textDecoration: "underline",
+      },
       "&:before": {
         background: "#fff",
         content: `""`,
@@ -56,7 +71,21 @@ const styles = {
     width: "100%",
     display: "grid",
     gridTemplateColumns: "repeat(3, 30%)",
-    gridGap: "5%",
+    gridGap: "2.5rem",
+    [`@media (max-width: 991.98px )`]: {
+      gridTemplateColumns: "repeat(2,50%)",
+      gridGap: "1.5rem",
+    },
+    [`@media (max-width: 575.98px )`]: {
+      gridTemplateColumns: "repeat(1,100%)",
+      gridGap: "1rem",
+    },
+  },
+  [`@media (max-width:1500.98px )`]: {
+    container: { width: "80%" },
+  },
+  [`@media (max-width:991.98px )`]: {
+    container: { width: "80%" },
   },
 };
 
