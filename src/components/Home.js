@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Link } from "react-router-dom";
 import MiniPalette from "./MiniPalette";
 import { withStyles } from "@material-ui/styles";
+import background from "../styles/background.svg";
 
 const styles = {
   root: {
@@ -10,6 +11,7 @@ const styles = {
     height: "100vh",
     alignItems: "flex-start",
     justifyContent: "center",
+    backgroundImage: `url(${background})`,
   },
   container: {
     width: "50%",
