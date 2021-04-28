@@ -1,6 +1,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/styles";
 import { DeleteFilled } from "@ant-design/icons";
+import { Popconfirm } from "antd";
 
 const styles = {
   root: {
@@ -90,21 +91,36 @@ function MiniPalette(props) {
   });
 
   function handleClick() {
-    console.log(`clicked ${id}`);
     props.history.push(`/palette/${id}`);
   }
 
-  function handleDelete(event) {
-    event.stopPropagation();
+  function handleDelete() {
     props.deletePalette(id);
+  }
+
+  function confirm(e) {
+    e.stopPropagation();
+    handleDelete();
+  }
+
+  function cancel(e) {
+    e.stopPropagation();
   }
 
   return (
     <div className={classes.root} onClick={handleClick}>
-      <DeleteFilled
-        className={classes.delete}
-        onClick={(event) => handleDelete(event)}
-      />
+      <Popconfirm
+        title="Delete this Palette?"
+        onConfirm={confirm}
+        onCancel={cancel}
+        okText="Yes"
+        cancelText="No"
+      >
+        <div onClick={(e) => e.stopPropagation()}>
+          <DeleteFilled className={classes.delete} />
+        </div>
+      </Popconfirm>
+
       <div className={classes.colors}>{miniPalettes}</div>
       <h5 className={classes.title}>
         {paletteName} <span>{emoji}</span>
