@@ -12,6 +12,7 @@ const styles = {
     alignItems: "flex-start",
     justifyContent: "center",
     backgroundImage: `url(${background})`,
+    overflow: "scroll",
   },
   container: {
     width: "50%",
