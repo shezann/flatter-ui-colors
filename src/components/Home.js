@@ -83,7 +83,7 @@ const styles = {
     },
     [`@media (max-width: 575.98px )`]: {
       gridTemplateColumns: "repeat(1,100%)",
-      gridGap: "1rem",
+      //gridGap: "1rem",
     },
   },
   [`@media (max-width:1500.98px )`]: {
@@ -101,7 +101,6 @@ function Home(props) {
   const { classes, palettes, setPalettes } = props;
 
   function deletePalette(id) {
-    console.log(palettes);
     const filteredPalettes = palettes.filter((palette) => palette.id !== id);
     setPalettes(filteredPalettes);
   }

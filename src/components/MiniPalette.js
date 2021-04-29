@@ -76,7 +76,7 @@ const styles = {
   },
 };
 
-function MiniPalette(props) {
+const MiniPalette = React.memo((props) => {
   //extract from props
   const { classes, id, paletteName, emoji, colors } = props;
   //create the mini palletes
@@ -106,7 +106,7 @@ function MiniPalette(props) {
   function cancel(e) {
     e.stopPropagation();
   }
-
+  
   return (
     <div className={classes.root} onClick={handleClick}>
       <Popconfirm
@@ -120,13 +120,12 @@ function MiniPalette(props) {
           <DeleteFilled className={classes.delete} />
         </div>
       </Popconfirm>
-
       <div className={classes.colors}>{miniPalettes}</div>
       <h5 className={classes.title}>
         {paletteName} <span>{emoji}</span>
       </h5>
     </div>
   );
-}
+});
 
 export default withStyles(styles)(MiniPalette);
