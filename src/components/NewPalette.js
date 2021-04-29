@@ -6,6 +6,7 @@ import { arrayMove } from "react-sortable-hoc";
 import NewPaletteNavbar from "./NewPaletteNavbar";
 import ColorPicker from "./ColorPicker";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import seedColors from "../helpers/seedColors";
 
 const { Header, Sider } = Layout;
 
@@ -21,7 +22,7 @@ function NewPalette(props) {
   });
   const [colorName, setColorName] = useState("");
   const [currentColor, setCurrentColor] = useState("#F29EFF");
-  const [palette, setPalette] = useState(props.palettes[0].colors);
+  const [palette, setPalette] = useState(seedColors[0].colors);
   const [newPaletteName, setNewPaletteName] = useState("");
 
   function deleteColor(hex) {
@@ -66,6 +67,7 @@ function NewPalette(props) {
             setColorName={setColorName}
             setButtonColor={setButtonColor}
             colorName={colorName}
+            currentColor={currentColor}
             setCurrentColor={setCurrentColor}
             setPalette={setPalette}
             buttonColor={buttonColor}

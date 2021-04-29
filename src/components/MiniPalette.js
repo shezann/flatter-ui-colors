@@ -106,7 +106,7 @@ const MiniPalette = React.memo((props) => {
   function cancel(e) {
     e.stopPropagation();
   }
-  
+
   return (
     <div className={classes.root} onClick={handleClick}>
       <Popconfirm

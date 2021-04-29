@@ -83,7 +83,7 @@ const styles = {
     },
     [`@media (max-width: 575.98px )`]: {
       gridTemplateColumns: "repeat(1,100%)",
-      //gridGap: "1rem",
+      gridGap: "1rem",
     },
   },
   [`@media (max-width:1500.98px )`]: {

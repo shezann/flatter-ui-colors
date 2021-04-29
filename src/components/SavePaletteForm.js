@@ -10,7 +10,6 @@ export default function SavePaletteForm(props) {
     palettes,
     newPaletteName,
     setNewPaletteName,
-    currentColor,
     history,
     savePalette,
   } = props;
@@ -37,18 +36,12 @@ export default function SavePaletteForm(props) {
   }
 
   useEffect(() => {
-    ValidatorForm.addValidationRule("isNameUnique", (value) =>
-      palette.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
-    );
-    ValidatorForm.addValidationRule("isColorUnique", (value) =>
-      palette.every(({ color }) => color !== currentColor)
-    );
     ValidatorForm.addValidationRule("isPaletteUnique", (value) =>
       palettes.every(
         ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
       )
     );
-  }, [currentColor, palette, palettes]);
+  }, [palettes]);
 
   return (
     <div>
@@ -75,6 +68,7 @@ export default function SavePaletteForm(props) {
           <p>Please enter a name for your awesome palette</p>
           <ValidatorForm
             id="palette-name-form"
+            instantValidate={false}
             onSubmit={() => {
               setEmojiVisible(true);
               setModalVisible(false);

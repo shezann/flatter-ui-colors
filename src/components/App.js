@@ -84,6 +84,12 @@ function App() {
                   />
                 )}
               />
+
+              <Route
+                render={() => (
+                  <Home palettes={palettes} setPalettes={setPalettes} />
+                )}
+              />
             </Switch>
           </CSSTransition>
         </TransitionGroup>

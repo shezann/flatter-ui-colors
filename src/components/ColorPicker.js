@@ -11,6 +11,7 @@ export default function ColorPicker(props) {
     setColorName,
     setButtonColor,
     colorName,
+    currentColor,
     setCurrentColor,
     setPalette,
     buttonColor,
@@ -24,7 +25,10 @@ export default function ColorPicker(props) {
     ValidatorForm.addValidationRule("isNameUnique", (value) =>
       palette.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
     );
-  }, [palette]);
+    ValidatorForm.addValidationRule("isColorUnique", (value) =>
+      palette.every(({ color }) => color !== currentColor)
+    );
+  }, [currentColor, palette]);
 
   function handleColorChange(newColor) {
     const { h, s, l, a } = newColor.hsl;
@@ -42,7 +46,12 @@ export default function ColorPicker(props) {
     //pick random color from all previous colors
     const allColors = palettes.map((p) => p.colors).flat();
     let random = Math.floor(Math.random() * allColors.length);
-    setPalette([...palette, allColors[random]]);
+    let randomColor = allColors[random];
+    while (palette.indexOf(randomColor) !== -1) {
+      random = Math.floor(Math.random() * allColors.length);
+      randomColor = allColors[random];
+    }
+    setPalette([...palette, randomColor]);
   }
 
   function addColor() {
@@ -96,7 +105,7 @@ export default function ColorPicker(props) {
         onChange={(newColor) => handleColorChange(newColor)}
       />
 
-      <ValidatorForm onSubmit={addColor}>
+      <ValidatorForm onSubmit={addColor} instantValidate={false}>
         <TextValidator
           value={colorName}
           label="Color Name"
